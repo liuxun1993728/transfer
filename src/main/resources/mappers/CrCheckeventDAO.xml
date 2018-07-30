@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuxun.transfer.mapper.CrCheckeventDAO">
+  <resultMap id="BaseResultMap" type="com.liuxun.transfer.po.CrCheckevent">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="EQUIPT_ID" jdbcType="VARCHAR" property="equiptId" />
+    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="CHECKPOINT_ID" jdbcType="VARCHAR" property="checkpointId" />
+    <result column="CHECK_USER" jdbcType="VARCHAR" property="checkUser" />
+    <result column="ADDRES" jdbcType="VARCHAR" property="addres" />
+    <result column="PCDDX" jdbcType="DECIMAL" property="pcddx" />
+    <result column="PCDDY" jdbcType="DECIMAL" property="pcddy" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CHECK_MODEL" jdbcType="VARCHAR" property="checkModel" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, USER_ID, EQUIPT_ID, START_TIME, END_TIME, CHECKPOINT_ID, CHECK_USER, ADDRES, 
+    PCDDX, PCDDY, REMARK, CHECK_MODEL
+  </sql>
+  <select id="selectByExample" parameterType="com.liuxun.transfer.po.CrCheckeventExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from LIUXUN.CR_CHECKEVENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from LIUXUN.CR_CHECKEVENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from LIUXUN.CR_CHECKEVENT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.liuxun.transfer.po.CrCheckeventExample">
+    delete from LIUXUN.CR_CHECKEVENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.liuxun.transfer.po.CrCheckevent">
+    insert into LIUXUN.CR_CHECKEVENT (ID, USER_ID, EQUIPT_ID, 
+      START_TIME, END_TIME, CHECKPOINT_ID, 
+      CHECK_USER, ADDRES, PCDDX, 
+      PCDDY, REMARK, CHECK_MODEL
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{equiptId,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{checkpointId,jdbcType=VARCHAR}, 
+      #{checkUser,jdbcType=VARCHAR}, #{addres,jdbcType=VARCHAR}, #{pcddx,jdbcType=DECIMAL}, 
+      #{pcddy,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{checkModel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuxun.transfer.po.CrCheckevent">
+    insert into LIUXUN.CR_CHECKEVENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="equiptId != null">
+        EQUIPT_ID,
+      </if>
+      <if test="startTime != null">
+        START_TIME,
+      </if>
+      <if test="endTime != null">
+        END_TIME,
+      </if>
+      <if test="checkpointId != null">
+        CHECKPOINT_ID,
+      </if>
+      <if test="checkUser != null">
+        CHECK_USER,
+      </if>
+      <if test="addres != null">
+        ADDRES,
+      </if>
+      <if test="pcddx != null">
+        PCDDX,
+      </if>
+      <if test="pcddy != null">
+        PCDDY,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="checkModel != null">
+        CHECK_MODEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="equiptId != null">
+        #{equiptId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkpointId != null">
+        #{checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUser != null">
+        #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="pcddx != null">
+        #{pcddx,jdbcType=DECIMAL},
+      </if>
+      <if test="pcddy != null">
+        #{pcddy,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="checkModel != null">
+        #{checkModel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.liuxun.transfer.po.CrCheckeventExample" resultType="java.lang.Long">
+    select count(*) from LIUXUN.CR_CHECKEVENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update LIUXUN.CR_CHECKEVENT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equiptId != null">
+        EQUIPT_ID = #{record.equiptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null">
+        START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null">
+        END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkpointId != null">
+        CHECKPOINT_ID = #{record.checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkUser != null">
+        CHECK_USER = #{record.checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addres != null">
+        ADDRES = #{record.addres,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcddx != null">
+        PCDDX = #{record.pcddx,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pcddy != null">
+        PCDDY = #{record.pcddy,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkModel != null">
+        CHECK_MODEL = #{record.checkModel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update LIUXUN.CR_CHECKEVENT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      EQUIPT_ID = #{record.equiptId,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{record.endTime,jdbcType=TIMESTAMP},
+      CHECKPOINT_ID = #{record.checkpointId,jdbcType=VARCHAR},
+      CHECK_USER = #{record.checkUser,jdbcType=VARCHAR},
+      ADDRES = #{record.addres,jdbcType=VARCHAR},
+      PCDDX = #{record.pcddx,jdbcType=DECIMAL},
+      PCDDY = #{record.pcddy,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CHECK_MODEL = #{record.checkModel,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuxun.transfer.po.CrCheckevent">
+    update LIUXUN.CR_CHECKEVENT
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="equiptId != null">
+        EQUIPT_ID = #{equiptId,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkpointId != null">
+        CHECKPOINT_ID = #{checkpointId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkUser != null">
+        CHECK_USER = #{checkUser,jdbcType=VARCHAR},
+      </if>
+      <if test="addres != null">
+        ADDRES = #{addres,jdbcType=VARCHAR},
+      </if>
+      <if test="pcddx != null">
+        PCDDX = #{pcddx,jdbcType=DECIMAL},
+      </if>
+      <if test="pcddy != null">
+        PCDDY = #{pcddy,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="checkModel != null">
+        CHECK_MODEL = #{checkModel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuxun.transfer.po.CrCheckevent">
+    update LIUXUN.CR_CHECKEVENT
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      EQUIPT_ID = #{equiptId,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      CHECKPOINT_ID = #{checkpointId,jdbcType=VARCHAR},
+      CHECK_USER = #{checkUser,jdbcType=VARCHAR},
+      ADDRES = #{addres,jdbcType=VARCHAR},
+      PCDDX = #{pcddx,jdbcType=DECIMAL},
+      PCDDY = #{pcddy,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CHECK_MODEL = #{checkModel,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

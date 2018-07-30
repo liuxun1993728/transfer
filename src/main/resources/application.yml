@@ -4,15 +4,15 @@ spring:
   application:
     name: transfer
   datasource:
-    url: jdbc:mysql://192.168.1.140:3306/camel?characterEncoding=UTF-8&autoReconnect=true
+    url: jdbc:oracle:thin:@192.168.1.130:1521:XE
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    username: root
-    password: root123
+    username: LIUXUN
+    password: oracle
   profiles:
     active: product
   redis:
     database: 0
-    host: localhost
+    host: 192.168.1.130
     port: 6379
 
 mybatis:
@@ -22,3 +22,9 @@ logging:
   file: ./transfer.log
   level:
     com.liuxun.transfer.mapper: debug
+
+
+pagehelper:
+  autoDialect: true
+  closeConn: false
+  reasonable: true
